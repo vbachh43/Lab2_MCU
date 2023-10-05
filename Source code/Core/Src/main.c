@@ -188,8 +188,7 @@ int main(void)
 
   setTimer1(50);
   setTimer2(100);
-  setTimer3(50);
-  setTimer4(50);
+  setTimer3(25);
   int index_led = 0;
 
   while (1)
@@ -207,7 +206,7 @@ int main(void)
 		}
 
 		if (timer3_flag == 1){
-			setTimer3(50);
+			setTimer3(25);
 			// TO DO
 			update7SEG(index_led);
 			if (index_led <= 3){
