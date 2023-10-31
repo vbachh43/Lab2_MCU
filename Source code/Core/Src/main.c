@@ -161,8 +161,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   int hour = 15 , minute = 8 , second = 50;
-
+  setTimer1(50);
+  setTimer2(100);
+  setTimer3(25);
+  int index_led = 0;
   int led_buffer[4] = {0, 0, 0, 0};
+
+  void update7SEG(int index){
+
+  }
   void updateClockBuffer(){
 	  // Clock visualization
 	  led_buffer[0] = hour / 10;
@@ -170,7 +177,29 @@ int main(void)
 	  led_buffer[2] = minute / 10;
 	  led_buffer[3] = minute % 10;
 
+	  if (timer1_flag == 1){
+		  setTimer1(50);
+		  // TO DO
+		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  }
 
+	  if (timer2_flag == 1){
+	  	  setTimer2(100);
+		  // TO DO
+		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+	  }
+
+	  if (timer3_flag == 1){
+		  setTimer3(25);
+		  // TO DO
+		  update7SEG(led_buffer[index_led]);
+		  if (index_led <= 3){
+			  index_led ++;
+			  if (index_led > 3){
+				  index_led = 0;
+			  }
+		  }
+	  }
   }
 
   while (1){
@@ -187,7 +216,7 @@ int main(void)
 		  hour = 0;
 	  }
 	  updateClockBuffer();
-	  HAL_Delay (1000);
+//	  HAL_Delay (1000);
   }
 
 	  /* USER CODE END 3 */
