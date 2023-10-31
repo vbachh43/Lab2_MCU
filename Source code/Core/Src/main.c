@@ -94,14 +94,34 @@ void display7SEG(int counter){
 		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_1 | GPIO_PIN_4, GPIO_PIN_SET);
 		break;
 
+	case 6:
+		HAL_GPIO_WritePin ( GPIOB , GPIO_PIN_0 | GPIO_PIN_2 | GPIO_PIN_3 |
+				                    GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET );
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+		break;
+
+	case 7:
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2, GPIO_PIN_RESET );
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 |
+								   GPIO_PIN_6, GPIO_PIN_SET);
+		break;
+
+	case 8:
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+								   GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET );
+		break;
+
+	case 9:
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 |
+				                   GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_6, GPIO_PIN_RESET );
+		HAL_GPIO_WritePin ( GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
+		break;
+
 	default:
 		break;
 	}
 }
 
-void updateClockBuffer(){
-
-}
 /* USER CODE END 0 */
 
 /**
@@ -142,28 +162,35 @@ int main(void)
 
   int hour = 15 , minute = 8 , second = 50;
 
+  int led_buffer[4] = {0, 0, 0, 0};
+  void updateClockBuffer(){
+	  // Clock visualization
+	  led_buffer[0] = hour / 10;
+	  led_buffer[1] = hour % 10;
+	  led_buffer[2] = minute / 10;
+	  led_buffer[3] = minute % 10;
+
+
+  }
+
   while (1){
-  second ++;
-
-  if (second >= 60){
-	 second = 0;
-	 minute ++;
+	  second ++;
+	  if (second >= 60){
+		 second = 0;
+		 minute ++;
+	  }
+	  if (minute >= 60){
+		  minute = 0;
+		  hour ++;
+	  }
+	  if (hour >=24){
+		  hour = 0;
+	  }
+	  updateClockBuffer();
+	  HAL_Delay (1000);
   }
 
-  if (minute >= 60){
-	  minute = 0;
-	  hour ++;
-  }
-
-  if (hour >=24){
-	  hour = 0;
-  }
-
-  updateClockBuffer();
-  HAL_Delay (1000);
-  }
-
-  /* USER CODE END 3 */
+	  /* USER CODE END 3 */
 }
 
 /**
