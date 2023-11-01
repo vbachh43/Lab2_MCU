@@ -23,6 +23,9 @@ int timer3_flag = 0;
 int timer4_counter = 0;
 int timer4_flag = 0;
 
+int timer_m_counter = 0;
+int timer_m_flag = 0;
+
 void setTimer0(int duration){
 	timer0_counter = duration / TIMER_CYCLE;
 	timer0_flag = 0;
@@ -46,6 +49,11 @@ void setTimer3(int duration){
 void setTimer4(int duration){
 	timer4_counter = duration;
 	timer4_flag = 0;
+}
+
+void setTimer_m(int duration){
+	timer_m_counter = duration;
+	timer_m_flag = 1;
 }
 
 void timerRun(){
@@ -81,6 +89,13 @@ void timerRun(){
 		timer4_counter --;
 		if (timer4_counter <= 0){
 			timer4_flag = 1;
+		}
+	}
+
+	if (timer_m_counter > 0){
+		timer_m_Counter --;
+		if (timer_m_flag <= 0){
+			timer_m_flag = 1;
 		}
 	}
 }
