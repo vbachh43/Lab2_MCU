@@ -9,14 +9,19 @@
 #define INC_SOFTWARE_TIMER_H_
 
 extern int timer0_counter;
-extern int timer0_flag;
+extern int timer1_counter;
+extern int timer2_counter;
+extern int timer3_counter;
+extern int timer4_counter;
+extern int timer_m_counter;
+
 extern int TIMER_CYCLE;
 
+extern int timer0_flag;
 extern int timer1_flag;
 extern int timer2_flag;
 extern int timer3_flag;
 extern int timer4_flag;
-
 extern int timer_m_flag;
 
 void setTimer0(int duration);
