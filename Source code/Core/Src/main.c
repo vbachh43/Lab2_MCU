@@ -125,7 +125,6 @@ void display7SEG (int counter){
 const int MAX_LED = 4;
 int led_buffer[4] = {0 , 0 , 0 , 0};
 int hour = 15 , minute = 8 , second = 50;
-
 void update7SEG(int index){
 	switch(index){
 	case 0:
